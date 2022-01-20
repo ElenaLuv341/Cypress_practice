@@ -1,16 +1,29 @@
+let NameLoc = '#txtUsername';
+let PasLoc = '#txtPassword';
+let ButLoc = '#btnLogin' ;
+
+
 export class LoginPage {
    
-    navigate(){
+    navigate(Url = 'https://opensource-demo.orangehrmlive.com/'){
         cy.visit('https://opensource-demo.orangehrmlive.com/')
     }
 
-    EnterUserName(){
-        cy.get(UserNameInput).type('Admin')
+    EnterUserNameP(Username ='Admin'){
+        cy.get(NameLoc).type(Username)
     }
-    EnterPassword(){
-        cy.get(passwordInput).type('admin123')
+    EnterPasswordP(Password = 'admin123'){
+        cy.get(PasLoc).type(Password)
     }
     ClickLogin(){
-        cy.get(loginBtn).click()
+        cy.get(ButLoc).click();
+    }
+    EnterUserNameN(UsernameN = "Dolly"){
+        cy.get(NameLoc).type(UsernameN)
+
+    }
+    EnterPasswordN(PasswordN = 'admin123'){
+    cy.get(PasLoc).type(Password)
     }
 }
+export default LoginPage
