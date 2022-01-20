@@ -1,50 +1,67 @@
-let UserNameInput='#txtUsername'
-    let passwordInput='#txtPassword'
-    let loginBtn='#btnLogin'
+ import {LoginPage} from "./LoginPage_po" 
 
-describe('My second test.Login', () =>{
-    it('Navigate to OrangeHRM for desctop.Positive case', ()=>{
-        cy.visit('https://opensource-demo.orangehrmlive.com/')
-        cy.viewport(1920,1080)
-        cy.get(UserNameInput).type('Admin') 
-        cy.get(passwordInput).type('admin123')
-        cy.get(loginBtn).click()
-        cy.get('#menu_dashboard_index > b').should('be.visible')
+
+
+
+describe('Desctop.Positive', () =>{
+    it('Navigate to OrangeHRM for desctop.Positive', ()=>{
+     cy.visit('https://opensource-demo.orangehrmlive.com/')
+     cy.viewport(1920,1080)
+     cy.get('#txtUsername').type('Admin') 
+     cy.get('#txtPassword').type('admin123')
+        cy.get('#btnLogin').click()
+        cy.get('#menu_dashboard_index > b').should('be.visible');
     })
 })
-    it('Login.Negative case', ()=>{
+
+
+describe('Desctop.Negative1', () =>{
+    it('Navigate to OrangeHRM for desctop.Negative1', ()=>{
     cy.visit('https://opensource-demo.orangehrmlive.com/')
     cy.viewport(1920,1080)
-    cy.get(UserNameInput).type('Admin43') 
-    cy.get(passwordInput).type('admin123')
-    cy.get(loginBtn).click()
-    cy.get('#spanMessage').should('not.be.visible')    
-    })
+    cy.get('#txtUsername').type('Dolly') 
+    cy.get('#txtPassword').type('admin123')
+    cy.get('#btnLogin').click()
+    cy.get('#spanMessage').should('be.visible');
+})
+})
 
-    it('Login.Negative case', ()=>{
+describe('Desctop.Negative2', () =>{
+    it('Navigate to OrangeHRM for desctop.Negative2', ()=>{
     cy.visit('https://opensource-demo.orangehrmlive.com/')
-        cy.viewport(1920,1080)
-        cy.get(UserNameInput).type('Admin') 
-        cy.get(passwordInput).type('admin')
-        cy.get(loginBtn).click()
-        cy.get('loginBtn').should('be.disabled')
- 
-    })
+    cy.viewport(1920,1080)
+    cy.get('#txtUsername').type('Admin') 
+    cy.get('#txtPassword').type('3456')
+    cy.get('#btnLogin').click()
+    cy.get('#spanMessage').should('contain','Invalid credentials');
+})
+
+})
 
 
-describe('My second test', () =>{
-    it('Navigate to OrangeHRM tablet', ()=>{
+describe('Tablet.Positive', () =>{
+    it('Navigate to OrangeHRM', ()=>{
         cy.visit('https://opensource-demo.orangehrmlive.com/')
         cy.viewport(1024,600)
+        LoginPositive('Admin','admin123');
+        
+    })
+})
+
+describe('Tablet.Negative', () =>{
+    it('Navigate to OrangeHRM', ()=>{
+        cy.visit('https://opensource-demo.orangehrmlive.com/')
+        cy.viewport(1024,600)
+        LoginNegative('Dolly','admin123');
         
     })
 })
 
 
-describe('My second test', () =>{
-    it('Navigate to OrangeHRM mobile', ()=>{
+describe('Mobile', () =>{
+    it('Navigate to OrangeHRM', ()=>{
         cy.visit('https://opensource-demo.orangehrmlive.com/')
-        cy.viewport(360,640)
+        cy.viewport(360,640);
     })
 })
 
@@ -53,43 +70,18 @@ describe('My second test', () =>{
 
 
 
-// Task#6 
- it('Positive case', () =>{
+function LoginPositive(Username, Password){
     cy.visit('https://opensource-demo.orangehrmlive.com/')
-    cy.get(UserNameInput).type('Admin') 
-    cy.get(passwordInput).type('admin123')
-    cy.get(loginBtn).click()
-
- })
-
-
-it('Negative case1', ()=>{
+        cy.get('#txtUsername').type(Username) 
+        cy.get('#txtPassword').type(Password)
+        cy.get('#btnLogin').click()
+        cy.get('#menu_dashboard_index > b').should('be.visible');
+    }
+function LoginNegative(UsernameN, PasswordN){
     cy.visit('https://opensource-demo.orangehrmlive.com/')
-    cy.get(UserNameInput).type('Admin') 
-    cy.get(passwordInput).type('12T45')
-    cy.get(loginBtn).click()
-    cy.get(passwordInput).should()
-})
+    cy.get('#txtUsername').type(UsernameN) 
+    cy.get('#txtPassword').type(PasswordN)
+    cy.get('#btnLogin').click()
+    cy.get('#spanMessage').should('contain','Invalid credentials');
+}
 
-it('Negative case2', ()=>{
-    cy.visit('https://opensource-demo.orangehrmlive.com/')
-    cy.get(UserNameInput).type('A45Hj') 
-    cy.get(passwordInput).type(' ')
-    cy.get(loginBtn).click()
-
-})
-
-it('Negative case3', ()=>{
-    cy.visit('https://opensource-demo.orangehrmlive.com/')
-    cy.get(UserNameInput).type('#hjouy') 
-    cy.get(passwordInput).type('GH56%')
-    cy.get(loginBtn).click()
-
-})
-it('Negative case4', ()=>{
-    cy.visit('https://opensource-demo.orangehrmlive.com/')
-    cy.get(UserNameInput).type(' Y889') 
-    cy.get(passwordInput).type('H 89*')
-    cy.get(loginBtn).click()
-
-})
