@@ -5,35 +5,23 @@ import {LoginPage} from "./LoginPage_po"
 
 describe('Desctop.Positive', () =>{
     it('Navigate to OrangeHRM for desctop.Positive', ()=>{
-     cy.visit('https://opensource-demo.orangehrmlive.com/')
      cy.viewport(1920,1080)
-     cy.get('#txtUsername').type('Admin') 
-     cy.get('#txtPassword').type('admin123')
-     cy.get('#btnLogin').click()
-     cy.get('#menu_dashboard_index > b').should('be.visible');
+     LoginPage.loginPositive();
     })
 })
 
 
 describe('Desctop.Negative1', () =>{
     it('Navigate to OrangeHRM for desctop.Negative1', ()=>{
-    cy.visit('https://opensource-demo.orangehrmlive.com/')
     cy.viewport(1920,1080)
-    cy.get('#txtUsername').type('Dolly') 
-    cy.get('#txtPassword').type('admin123')
-    cy.get('#btnLogin').click()
-    cy.get('#spanMessage').should('be.visible');
+    LoginPage.loginNegative1('Dolly', 'admin*');
 })
 })
 
 describe('Desctop.Negative2', () =>{
     it('Navigate to OrangeHRM for desctop.Negative2', ()=>{
-    cy.visit('https://opensource-demo.orangehrmlive.com/')
     cy.viewport(1920,1080)
-    cy.get('#txtUsername').type('Admi*') 
-    cy.get('#txtPassword').type('3456')
-    cy.get('#btnLogin').click()
-    cy.get('#spanMessage').should('contain','Invalid credentials');
+    LoginPage.loginNegative2();
 })
 
 })
@@ -42,7 +30,7 @@ describe('Desctop.Negative2', () =>{
 describe('Tablet.Positive', () =>{
     it('Navigate to OrangeHRM', ()=>{
         cy.viewport(1024,600)
-        LoginPositive('Admin', 'admin123', 'https://opensource-demo.orangehrmlive.com/')
+        LoginPage.loginPositive();
         
     })
 })
@@ -50,7 +38,7 @@ describe('Tablet.Positive', () =>{
 describe('Tablet.Negative1', () =>{
     it('Navigate to OrangeHRM', ()=>{
         cy.viewport(1024,600)
-        LoginNegative('Dolly','admin1234', 'https://opensource-demo.orangehrmlive.com/');
+        LoginPage.loginNegative1('Dolly', 'admin*');
         
     })
 })
@@ -59,8 +47,7 @@ describe('Tablet.Negative1', () =>{
 describe('Tablet.Negative2', () =>{
     it('Navigate to OrangeHRM', ()=>{
         cy.viewport(1024,600)
-        LoginPage.loginNegative('Admi*', )
-        LoginNegative('Admi*','3456');
+        LoginPage.loginNegative2();
         
     })
 })
@@ -68,10 +55,27 @@ describe('Tablet.Negative2', () =>{
 
 
 
-describe('Mobile', () =>{
+describe('Mobile.Positive', () =>{
     it('Navigate to OrangeHRM', ()=>{
         cy.visit('https://opensource-demo.orangehrmlive.com/')
-        cy.viewport(360,640);
+        cy.viewport(360,640)
+    LoginPage.loginPositive();
+
     })
 })
 
+describe('Mobile.Negative1', () =>{
+    it('Navigate to OrangeHRM', ()=>{
+        cy.visit('https://opensource-demo.orangehrmlive.com/')
+        cy.viewport(360,640)
+    LoginPage.loginNegative1('asss', '456');
+    })
+})
+
+describe('Mobile.Negative2', () =>{
+    it('Navigate to OrangeHRM', ()=>{
+        cy.visit('https://opensource-demo.orangehrmlive.com/')
+        cy.viewport(360,640)
+    LoginPage.loginNegative2();
+    })
+})
