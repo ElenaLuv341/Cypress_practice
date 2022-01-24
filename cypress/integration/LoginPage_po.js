@@ -15,6 +15,8 @@ export class LoginPage {
         cy.get(pasLoc).type(passwordP)
         cy.get(butLoc).click()
         cy.get(menudash).should('be.visible');
+        cy.get('#welcome').click()
+        cy.get('#welcome-menu > :nth-child(1) > :nth-child(3) > a').click()
     }
     static loginNegative1(usernameN, passwordN){
         cy.visit(homeurl)
