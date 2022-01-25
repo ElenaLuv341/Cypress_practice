@@ -12,7 +12,7 @@ describe('Desctop.Positive and Negative', function()
     LoginPage.loginPositive();
     })
     it('Navigate to OrangeHRM for desctop.Negative1', ()=>{
-    LoginPage.loginNegative1(randomEmail(), 'admin123');
+    LoginPage.loginNegative(randomEmail(), 'admin123','Invalid credentials');
     })
     it('Navigate to OrangeHRM for desctop.Negative2', ()=>{
     LoginPage.loginNegative2();
@@ -28,17 +28,12 @@ describe('Desctop.Positive and Negative', function()
         LoginPage.loginPositive();
         
     })
-
     it('Navigate to OrangeHRM', ()=>{
-        LoginPage.loginNegative1(randomEmail(), 'admin*');
-        
-    })
-    it('Navigate to OrangeHRM', ()=>{
-        LoginPage.loginNegative2();
+        LoginPage.loginNegative(randomEmail(), 'admin123','Invalid credentials');
         
     })
     it('Tablet.Negative.RandomEmail', () =>{
-      LoginPage.loginNegative1(randomEmail(),'admin123')
+      LoginPage.loginNegative2()
 
     })
   })
@@ -51,7 +46,7 @@ describe('Mobile.Positive and Negative', function(){
     LoginPage.loginPositive();
     })
     it('Navigate to OrangeHRM', ()=>{
-    LoginPage.loginNegative1(randomEmail(), '456');
+    LoginPage.loginNegative(randomEmail(), '456', 'Invalid credentials');
     })
     it('Navigate to OrangeHRM', ()=>{
     LoginPage.loginNegative2();
@@ -60,12 +55,6 @@ describe('Mobile.Positive and Negative', function(){
 
 
 describe('Positive test with transferdata', function(){
-    
-  it('Try transfer', function(){
-      cy.fixture('users').then((userInfo) => {
-        expect(userInfo.userName).to.eq('Admin');
-      })
-    })
     it('Login test', function(){
       cy.visit('https://opensource-demo.orangehrmlive.com/')
       cy.fixture('users').then(userInfo=>{
