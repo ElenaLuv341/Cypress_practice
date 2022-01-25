@@ -1,7 +1,7 @@
 import { after, before } from "lodash"
 import randomEmail from "random-email"
 import {LoginPage} from "./LoginPage_po" 
-
+/// <reference types = 'Cypress' />
 
 describe('Desctop.Positive and Negative', function()
   {  
@@ -59,28 +59,19 @@ describe('Mobile.Positive and Negative', function(){
 }) 
 
 
-// describe('Positive test with transferdata', function(){
-//     it('Write a file', function(){
-//      cy.writeFile('cypress\\fixtures\\users.json',{
-//         userName:'Admin',
-//         passWord:'admin123'
-//     })
-//     it('read a file', function(){
-//         cy.readFile('users.json').should('exist').and ('contain','userName')
-//         cy.fixtures('users').as('usersJson')
-//         cy.fixtures('users').then((userinfo)=>{
-//             expect(userinfo.username).to.eq('Admin');
-//         })
-
-        
-// 	 it.only('Login test', function(){
-//         cy.visit('https://opensource-demo.orangehrmlive.com/')
-//         cy.fixtures('users').then((userinfo)=>
-//         cy.get(nameLoc).type(userinfo.username)
-//         cy.get(pasLoc).type(userinfo.password)
-//         cy.get(butLoc).click()
-
-      
-//      })
-//     })
-// })
+describe('Positive test with transferdata', function(){
+    
+  it('Try transfer', function(){
+      cy.fixture('users').then((userInfo) => {
+        expect(userInfo.userName).to.eq('Admin');
+      })
+    })
+    it('Login test', function(){
+      cy.visit('https://opensource-demo.orangehrmlive.com/')
+      cy.fixture('users').then(userInfo=>{
+      cy.get('#txtUsername').type(userInfo.userName)
+      cy.get('#txtPassword').type(userInfo.passWord)
+      cy.get('#btnLogin').click()
+      })
+  }) 
+})
