@@ -8,7 +8,7 @@ describe('Desctop.Positive and Negative', function()
     beforeEach(function() {
     cy.viewport(1920,1080)
  })
-    it('Navigate to OrangeHRM for desctop.Positive', ()=>{
+    it.only('Navigate to OrangeHRM for desctop.Positive', ()=>{
     LoginPage.loginPositive();
     })
     it('Navigate to OrangeHRM for desctop.Negative1', ()=>{

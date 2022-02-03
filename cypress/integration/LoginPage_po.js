@@ -16,6 +16,8 @@ export class LoginPage {
         cy.get(pasLoc).type(passwordP)
         cy.get(butLoc).click()
         cy.get(menudash).should('be.visible');
+        // cy.get(panelW).contains(logOuT).click();
+        // cy.contains('Logout').click();
         cy.get(panelW). click()
         cy.contains(logOuT).click();
     }
